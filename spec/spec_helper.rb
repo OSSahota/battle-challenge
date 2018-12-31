@@ -12,6 +12,23 @@
 # the additional setup, and require it from the spec files that actually need
 # it.
 #
+
+# Getting testing infrastructure setup ch.
+# Including what's needed to prepare Capybara & to get Capybara to test our app.
+#
+# set RACK_ENV to test
+ENV['RACK_ENV'] = 'test'
+# require our Sinatra app file (app.rb)
+require File.join(File.dirname(__FILE__), '..', 'app.rb')
+# require other dependencies
+require 'capybara'
+require 'capybara/rspec'
+require 'rspec'
+#
+# tell Capybara about our app class: Battle
+Capybara.app = Battle
+#
+
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
