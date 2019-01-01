@@ -62,7 +62,8 @@ class Battle < Sinatra::Base
     # Implementing hit points ch.
     @player_1 = $player_1
     @player_2 = $player_2
-    @player_1.attack(@player_2)
+    # @player_1.attack(@player_2)
+    Game.new.attack(@player_2)
 
     erb(:attack)
   end

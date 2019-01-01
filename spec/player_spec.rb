@@ -14,17 +14,14 @@ describe Player do
     it 'returns player 1 hit points' do
       expect(dave.hit_points).to eq described_class::DEFAULT_HIT_POINTS
     end
-
-  describe '#attack' do
-    it 'damages player 2' do
-      expect(mittens).to receive(:receive_damage)
-      dave.attack(mittens)
-    end
   end
-
-    # it 'reduces players hit points' do
-    #   expect(mittens.hit_points).to eq 50
-    # end
-  end
+  
+  # Extracted to game_spec.rb.
+  # describe '#attack' do
+  #   it 'damages player 2' do
+  #     expect(mittens).to receive(:receive_damage)
+  #     dave.attack(mittens)
+  #   end
+  # end
 
 end
