@@ -1,3 +1,13 @@
   <%= @player_1_name %> vs. <%= @player_2_name %>
   <br>
   <%= @player_2_name %>: 60HP
+  <br>
+  <!-- Could use either link or form element with button.
+    Needs to match whatever is defined in feature spec.
+  -->
+  <!--a href="/attack">Attack</a> -->
+  <!-- OR -->
+  <h2>Attacking Options</h2>
+  <form action="/attack">
+    <input type="submit" value="Attack">
+  </form>
