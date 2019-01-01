@@ -1,4 +1,5 @@
 require 'sinatra/base'
+require './lib/player'
 
 class Battle < Sinatra::Base
   enable :sessions
@@ -19,8 +20,15 @@ class Battle < Sinatra::Base
 
     # Refactoring US#1 via PrG design pattern.
     # Storing name values held in params hash to the session.
-    session[:player_1_name] = params[:player_1_name]
-    session[:player_2_name] = params[:player_2_name]
+    # session[:player_1_name] = params[:player_1_name]
+    # session[:player_2_name] = params[:player_2_name]
+
+    # Extracting Logic to Model layer - storing params values to global vars
+    # instead of storing to session.
+    $player_1 = Player.new(params[:player_1_name])
+    $player_2 = Player.new(params[:player_2_name])
+    # p "player_1: #{$player_1}"
+    # p "player_2: #{$player_2}"
     # Redirecting rendering of view to get '/play' route.
     # erb(:play)
     redirect '/play'
@@ -29,14 +37,20 @@ class Battle < Sinatra::Base
   # Route created as part of refactoring US#1 via PrG design pattern.
   get '/play' do
     # Extracting values from session to instance variables.
-    @player_1_name = session[:player_1_name]
-    @player_2_name = session[:player_2_name]
+    # @player_1_name = session[:player_1_name]
+    # @player_2_name = session[:player_2_name]
+    @player_1_name = $player_1.name
+    @player_2_name = $player_2.name
+    # p "player_1_name: #{@player_1_name}"
+    # p "player_2_name: #{@player_2_name}"
     erb(:play)
   end
 
   get '/attack' do
-    @player_1_name = session[:player_1_name]
-    @player_2_name = session[:player_2_name]
+    # @player_1_name = session[:player_1_name]
+    # @player_2_name = session[:player_2_name]
+    @player_1_name = $player_1.name
+    @player_2_name = $player_2.name
     erb(:attack)
   end
 
