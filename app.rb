@@ -39,18 +39,31 @@ class Battle < Sinatra::Base
     # Extracting values from session to instance variables.
     # @player_1_name = session[:player_1_name]
     # @player_2_name = session[:player_2_name]
-    @player_1_name = $player_1.name
-    @player_2_name = $player_2.name
+
+    # Extracting values from global vars to instance vars.
+    # @player_1_name = $player_1.name
+    # @player_2_name = $player_2.name
     # p "player_1_name: #{@player_1_name}"
     # p "player_2_name: #{@player_2_name}"
+
+    # Implementing hit points ch.
+    @player_1 = $player_1
+    @player_2 = $player_2
+
     erb(:play)
   end
 
   get '/attack' do
     # @player_1_name = session[:player_1_name]
     # @player_2_name = session[:player_2_name]
-    @player_1_name = $player_1.name
-    @player_2_name = $player_2.name
+    # @player_1_name = $player_1.name
+    # @player_2_name = $player_2.name
+
+    # Implementing hit points ch.
+    @player_1 = $player_1
+    @player_2 = $player_2
+    @player_1.attack(@player_2)
+
     erb(:attack)
   end
 
