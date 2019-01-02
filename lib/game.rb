@@ -13,15 +13,17 @@ class Game
   end
 
   def switch_turns
-    p "@current_turn before switch: #{@current_turn}"
-    @current_turn =  opponent_of(current_turn)
-    p "@current_turn after switch: #{@current_turn}"
+    p "@current_turn before switch: #{current_turn}"
+    @current_turn = switch
+    p "@current_turn after switch: #{current_turn}"
   end
 
   private
 
-  def opponent_of(current_player)
-    @current_turn == @player_1 ? @player_2 : @player_1
+  def switch
+    # if @current_turn value is equal to player 1 then set it
+    # to equal player 2 else set to player 1.
+    current_turn == player_1 ? player_2 : player_1
   end
 
 end

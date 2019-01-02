@@ -82,9 +82,15 @@ class Battle < Sinatra::Base
     # Skinny controllers ch.
     @game = $game
     @game.attack(@game.player_2)
-    @game.switch_turns
-
+    # Extracting to post '/switch-turns' as part of US#7.
+    # @game.switch_turns
     erb(:attack)
+  end
+
+  post '/switch-turns' do
+    @game = $game
+    @game.switch_turns
+    redirect '/play'
   end
 
   # start the server if ruby file is executed directly
