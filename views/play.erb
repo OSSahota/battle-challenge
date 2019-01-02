@@ -1,16 +1,18 @@
   <%= @game.player_1.name %> vs. <%= @game.player_2.name %>
   <br>
-  <%= @game.player_2.name %>: <%= @game.player_2.hit_points %>HP
+  <%= @game.player_1.name %>: <%= @game.player_1.hit_points %>HP
   <br>
-  <%= @game.current_turn.name %>'s turn
+  <%= @game.player_2.name %>: <%= @game.player_2.hit_points %>HP
   <br>
 
   <!-- Could use either link or form element with button.
-    Needs to match whatever is defined in feature spec.
-  -->
+    Needs to match whatever is defined in feature spec. -->
   <!--a href="/attack">Attack</a> -->
   <!-- OR -->
   <h2>Attacking Options</h2>
+  <br>
+  <%= @game.current_turn.name %>'s turn
+  <br>
   <form action="/attack">
     <input type="submit" value="Attack">
   </form>
