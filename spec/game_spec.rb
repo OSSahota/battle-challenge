@@ -17,6 +17,13 @@ describe Game do
     end
   end
 
+  describe '#attack' do
+    it 'damages player 2' do
+      expect(player_2).to receive(:receive_damage)
+      game.attack(player_2)
+    end
+  end
+
   describe '#current_turn' do
     it 'starts as player 1' do
       expect(game.current_turn).to eq player_1
@@ -30,10 +37,11 @@ describe Game do
     end
   end
 
-  describe '#attack' do
-    it 'damages player 2' do
-      expect(player_2).to receive(:receive_damage)
-      game.attack(player_2)
+  # Multiplayer US#8 - found a little too complex to follow the thought process here.
+  describe '#opponent_of' do
+    it 'finds the opponents player' do
+      expect(game.opponent_of(player_1)).to eq player_2
+      expect(game.opponent_of(player_2)).to eq player_1
     end
   end
 

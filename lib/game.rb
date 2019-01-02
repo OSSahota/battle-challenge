@@ -18,6 +18,11 @@ class Game
     p "@current_turn after switch: #{current_turn}"
   end
 
+  # introduced for US#8. Not the best way...
+  def opponent_of(the_player)
+    the_player == player_1 ? player_2 : player_1
+  end
+
   private
 
   def switch

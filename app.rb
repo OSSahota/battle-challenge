@@ -81,9 +81,13 @@ class Battle < Sinatra::Base
 
     # Skinny controllers ch.
     @game = $game
-    @game.attack(@game.player_2)
+    # Replaced in Multiplayer:US#8 - complex!
+    # @game.attack(@game.player_2)
+    @game.attack(@game.opponent_of(@game.current_turn))
+
     # Extracting to post '/switch-turns' as part of US#7.
     # @game.switch_turns
+    
     erb(:attack)
   end
 

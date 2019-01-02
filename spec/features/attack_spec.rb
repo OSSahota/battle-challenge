@@ -26,4 +26,15 @@ feature 'Attack player' do
     click_button 'Attack'
     expect(page).to have_content 'Mittens attacked Dave'
   end
+
+  scenario 'Reducing player 1 hit points by 10' do
+    sign_in_and_play
+    click_button 'Attack' #p1 turn to attack first
+    click_button 'OK'     #p1 clicks OK after attack to return to play.erb view page
+    click_button 'Attack' #p2 turn to attack first
+    click_button 'OK'     #p2 clicks OK after attack to return to play.erb view page
+    # expect to see p1's HP down by 10 to 50HP
+    expect(page).not_to have_content 'Dave: 60HP'
+    expect(page).to have_content 'Dave: 50HP'
+  end
 end
