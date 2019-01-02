@@ -1,8 +1,9 @@
 require 'sinatra/base'
 require './lib/player'
+require './lib/game'
 
 class Battle < Sinatra::Base
-  enable :sessions
+  # enable :sessions
 
   get '/' do
     # US#1-Entering players ch
@@ -25,10 +26,18 @@ class Battle < Sinatra::Base
 
     # Extracting Logic to Model layer - storing params values to global vars
     # instead of storing to session.
-    $player_1 = Player.new(params[:player_1_name])
-    $player_2 = Player.new(params[:player_2_name])
+    # $player_1 = Player.new(params[:player_1_name])
+    # $player_2 = Player.new(params[:player_2_name])
     # p "player_1: #{$player_1}"
     # p "player_2: #{$player_2}"
+
+    # Skinny controllers ch.
+    player_1 = Player.new(params[:player_1_name])
+    player_2 = Player.new(params[:player_2_name])
+    $game = Game.new(player_1, player_2)
+    p player_1
+    p player_2
+    p $game
     # Redirecting rendering of view to get '/play' route.
     # erb(:play)
     redirect '/play'
@@ -47,8 +56,12 @@ class Battle < Sinatra::Base
     # p "player_2_name: #{@player_2_name}"
 
     # Implementing hit points ch.
-    @player_1 = $player_1
-    @player_2 = $player_2
+    # Replaced during Skinny Controllers ch.
+    # @player_1 = $player_1
+    # @player_2 = $player_2
+
+    # Skinny controllers ch.
+    @game = $game
 
     erb(:play)
   end
@@ -59,11 +72,16 @@ class Battle < Sinatra::Base
     # @player_1_name = $player_1.name
     # @player_2_name = $player_2.name
 
-    # Implementing hit points ch.
-    @player_1 = $player_1
-    @player_2 = $player_2
-    # @player_1.attack(@player_2)
-    Game.new.attack(@player_2)
+    # # Implementing hit points ch.
+    # Replaced during Skinny Controllers ch.
+    # @player_1 = $player_1
+    # @player_2 = $player_2
+    # # @player_1.attack(@player_2)
+    # Game.new.attack(@player_2)
+
+    # Skinny controllers ch.
+    @game = $game
+    @game.attack(@game.player_2)
 
     erb(:attack)
   end

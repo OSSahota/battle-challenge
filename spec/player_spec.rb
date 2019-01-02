@@ -15,7 +15,7 @@ describe Player do
       expect(dave.hit_points).to eq described_class::DEFAULT_HIT_POINTS
     end
   end
-  
+
   # Extracted to game_spec.rb.
   # describe '#attack' do
   #   it 'damages player 2' do
@@ -23,5 +23,13 @@ describe Player do
   #     dave.attack(mittens)
   #   end
   # end
+
+  # Added during Skinny Controllers ch although should have been
+  # added during Implementing hit points ch.
+  describe '#receive_damage' do
+    it 'reduces the player hit points' do
+      expect { dave.receive_damage }.to change { dave.hit_points }.by(-10)
+    end
+  end
 
 end
