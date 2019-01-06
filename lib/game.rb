@@ -23,7 +23,24 @@ class Game
     the_player == player_1 ? player_2 : player_1
   end
 
+  # Losing and Winning ch.
+  def game_over?
+    losing_players != nil ? true: false
+  end
+  # Losing and Winning ch.
+  def loser
+    losing_players
+  end
+
   private
+  # Losing and Winning ch.
+  def losing_players
+    if player_1.hit_points <= 0
+      player_1
+    elsif player_2.hit_points <= 0
+      player_2
+    end
+  end
 
   def switch
     # if @current_turn value is equal to player 1 then set it

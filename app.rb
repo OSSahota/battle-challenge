@@ -83,11 +83,13 @@ class Battle < Sinatra::Base
     @game = $game
     # Replaced in Multiplayer:US#8 - complex!
     # @game.attack(@game.player_2)
-    @game.attack(@game.opponent_of(@game.current_turn))
+
+    # Extract following line of code to post '/attack' route.
+    # @game.attack(@game.opponent_of(@game.current_turn))
 
     # Extracting to post '/switch-turns' as part of US#7.
     # @game.switch_turns
-    
+
     erb(:attack)
   end
 
@@ -95,6 +97,24 @@ class Battle < Sinatra::Base
     @game = $game
     @game.switch_turns
     redirect '/play'
+  end
+
+  # Losing and Winning ch. post method route to make it cleaner
+  # and roubust, part of refactoring.
+  post '/attack' do
+    @game = $game
+    @game.attack(@game.opponent_of(@game.current_turn))
+    if @game.game_over?
+      redirect '/game-over'
+    else
+      redirect '/attack'
+    end
+  end
+
+  # Losing and Winning ch.
+  get '/game-over' do
+    @game = $game
+    erb(:game_over)
   end
 
   # start the server if ruby file is executed directly
